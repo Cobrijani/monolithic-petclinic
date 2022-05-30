@@ -18,5 +18,4 @@ public class ManagementController {
         model.put("revenues", clinicService.listYearlyRevenue());
         return "management/showRevenue";
     }
-
 }
