@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = HelloWorldController.class)
-public class MockMvcDemoTest {
+class MockMvcDemoTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -20,8 +20,8 @@ public class MockMvcDemoTest {
     @Test
     void receive_hello_world() throws Exception {
         mockMvc.perform(get("/api"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.message").value("hello world"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("hello world"));
     }
 }
 
@@ -30,7 +30,7 @@ class HelloWorldController {
 
     /**
      * responds with the json:
-     *
+     * <p>
      * { "message": "hello world" }
      */
     @GetMapping("/api")

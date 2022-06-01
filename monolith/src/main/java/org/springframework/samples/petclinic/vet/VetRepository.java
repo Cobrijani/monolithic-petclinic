@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.db;
-
-import java.util.Collection;
+package org.springframework.samples.petclinic.vet;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.model.Vet;
+import org.springframework.samples.petclinic.vet.model.Vet;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * Repository class for <code>Vet</code> domain objects All method names are compliant with Spring Data naming
@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-public interface VetRepository extends Repository<Vet, Integer> {
+interface VetRepository extends Repository<Vet, Integer> {
 
     /**
      * Retrieve all <code>Vet</code>s from the data store.
@@ -41,6 +41,5 @@ public interface VetRepository extends Repository<Vet, Integer> {
      */
     @Transactional(readOnly = true)
     Collection<Vet> findAll() throws DataAccessException;
-
 
 }
