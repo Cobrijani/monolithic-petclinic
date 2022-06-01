@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.vet;
 
 import org.springframework.samples.petclinic.vet.dto.VetDto;
-import org.springframework.samples.petclinic.vet.model.Vet;
 
 import java.util.Collection;
 

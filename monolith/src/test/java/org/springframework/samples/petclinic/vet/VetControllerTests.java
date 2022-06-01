@@ -16,10 +16,19 @@
 package org.springframework.samples.petclinic.vet;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.samples.petclinic.vet.dto.SpecialtyDto;
+import org.springframework.samples.petclinic.vet.dto.VetDto;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,21 +41,23 @@ class VetControllerTests {
     @Autowired
     MockMvc mockMvc;
 
+    @MockBean
+    VetService vetService;
+
     @Test
     void testShowVetListHtml() throws Exception {
+        Mockito.when(vetService.allVets()).thenReturn(Arrays.asList(
+                new VetDto(1, "James", "Carter", Collections.emptyList(), 0),
+                new VetDto(2, "Helen", "Leary", Arrays.asList(new SpecialtyDto(1, "radiology")), 1)));
+
+
         mockMvc.perform(get("/vets"))
             .andExpect(status().isOk())
             .andExpect(xpath("//table[@id='vets']").exists())
-            .andExpect(xpath("//table[@id='vets']/tbody/tr").nodeCount(6))
+            .andExpect(xpath("//table[@id='vets']/tbody/tr").nodeCount(2))
             .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=1]/td[position()=1]").string("James Carter"))
             .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=1]/td[position()=2]/span").string("none"))
             .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=2]/td[position()=1]").string("Helen Leary"))
-            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=2]/td[position()=2]/span").string("radiology "))
-            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=3]/td[position()=1]").string("Linda Douglas"))
-            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=3]/td[position()=2]/span").nodeCount(2))
-            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=3]/td[position()=2]/span[position()=1]").string("dentistry "))
-            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=3]/td[position()=2]/span[position()=2]").string("surgery "))
-        ;
+            .andExpect(xpath("//table[@id='vets']/tbody/tr[position()=2]/td[position()=2]/span").string("radiology "));
     }
-
 }

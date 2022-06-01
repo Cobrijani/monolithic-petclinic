@@ -4,20 +4,21 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.vet.dto.VetDto;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-public class RemoteVetServiceImpl implements VetService{
+@Service
+public class VetClient implements VetService{
     private int port;
 
-    public RemoteVetServiceImpl() {
+    public VetClient() {
         port = 8081;
     }
 
-    public RemoteVetServiceImpl(int port) {
+    public VetClient(int port) {
         this.port = port;
     }
 

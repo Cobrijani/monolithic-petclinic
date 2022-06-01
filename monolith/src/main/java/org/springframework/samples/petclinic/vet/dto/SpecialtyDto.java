@@ -4,6 +4,14 @@ public class SpecialtyDto {
     private Integer id;
     private String name;
 
+    public SpecialtyDto() {
+    }
+
+    public SpecialtyDto(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

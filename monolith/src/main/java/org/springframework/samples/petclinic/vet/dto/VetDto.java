@@ -10,6 +10,17 @@ public class VetDto {
     private List<SpecialtyDto> specialties;
     private Integer nrOfSpecialties;
 
+    public VetDto() {
+    }
+
+    public VetDto(Integer id, String firstName, String lastName, List<SpecialtyDto> specialties, Integer nrOfSpecialties) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialties = specialties;
+        this.nrOfSpecialties = nrOfSpecialties;
+    }
+
     public Integer getId() {
         return id;
     }

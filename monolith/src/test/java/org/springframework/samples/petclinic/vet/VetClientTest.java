@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.vet.dto.VetDto;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 
@@ -15,10 +14,10 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class RemoteVetServiceImplTest {
+public class VetClientTest {
 
     private final WireMockServer wireMock = new WireMockServer(options().port(8082));
-    private RemoteVetServiceImpl remoteVetService = new RemoteVetServiceImpl(8082);
+    private VetClient remoteVetService = new VetClient(8082);
 
     @BeforeEach
     void startWireMock() {
