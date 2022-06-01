@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.vet;
 
+import org.springframework.samples.petclinic.vet.dto.VetDto;
 import org.springframework.samples.petclinic.vet.model.Vet;
 
 import java.util.Collection;
@@ -14,5 +15,5 @@ public interface VetService {
      *
      * @return collection of vets
      */
-    Collection<Vet> allVets();
+    Collection<VetDto> allVets();
 }

@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.vet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.samples.petclinic.vet.dto.VetDto;
 import org.springframework.samples.petclinic.vet.model.Vet;
 
 import java.util.Collection;
@@ -17,7 +18,7 @@ class VetServiceImplTests {
 
     @Test
     void shouldFindVets() {
-        Collection<Vet> vets = service.allVets();
+        Collection<VetDto> vets = service.allVets();
 
         assertThat(vets)
                 .filteredOn(vet -> vet.getId() == 3)
@@ -25,7 +26,7 @@ class VetServiceImplTests {
                 .first()
                 .hasFieldOrPropertyWithValue("lastName", "Douglas")
                 .hasFieldOrPropertyWithValue("nrOfSpecialties", 2)
-                .extracting(Vet::getSpecialties).asList()
+                .extracting(VetDto::getSpecialties).asList()
                 .extracting("name")
                 .containsExactly("dentistry", "surgery");
     }
