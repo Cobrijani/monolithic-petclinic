@@ -11,11 +11,25 @@ import java.util.Collection;
 import java.util.List;
 
 public class RemoteVetServiceImpl implements VetService{
+    private int port;
+
+    public RemoteVetServiceImpl() {
+        port = 8081;
+    }
+
+    public RemoteVetServiceImpl(int port) {
+        this.port = port;
+    }
+
     @Override
     public Collection<VetDto> allVets() {
         RestTemplate template = new RestTemplate();
-        ResponseEntity<ArrayList<VetDto>> response = template.exchange("http://localhost:8081/vets", HttpMethod.GET, null, new ParameterizedTypeReference<ArrayList<VetDto>>() {
-        });
-        return response.getBody();
+        try{
+            ResponseEntity<ArrayList<VetDto>> response = template.exchange("http://localhost:"+ port + "/vets", HttpMethod.GET, null, new ParameterizedTypeReference<ArrayList<VetDto>>() {
+            });
+            return response.getBody();
+        }catch(Exception ex) {
+            return new ArrayList<>();
+        }
     }
 }
