@@ -6,13 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WiremockDemoTest {
+class WiremockDemoTest {
 
     private final WireMockServer wireMock = new WireMockServer(options().port(8089));
 
@@ -29,9 +27,9 @@ public class WiremockDemoTest {
     @Test
     void how_to_stub_a_server_with_wiremock() {
         wireMock.stubFor(get(urlEqualTo("/demo"))
-            .willReturn(aResponse()
-                .withHeader("Content-Type", "application/json")
-                .withBody("[\"James\", \"Helen\" ]")));
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("[\"James\", \"Helen\" ]")));
 
         String[] result = new RestTemplate().getForObject("http://localhost:8089/demo", String[].class);
 

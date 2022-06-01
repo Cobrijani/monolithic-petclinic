@@ -19,13 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.orm.ObjectRetrievalFailureException;
-import org.springframework.samples.petclinic.model.BaseEntity;
-import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.model.YearlyRevenue;
+import org.springframework.samples.petclinic.model.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -155,21 +149,6 @@ class ClinicServiceTests {
     }
 
     @Test
-    void shouldFindVets() {
-        Collection<Vet> vets = service.allVets();
-
-        assertThat(vets)
-            .filteredOn(vet -> vet.getId() == 3)
-            .hasSize(1)
-            .first()
-            .hasFieldOrPropertyWithValue("lastName", "Douglas")
-            .hasFieldOrPropertyWithValue("nrOfSpecialties", 2)
-            .extracting(Vet::getSpecialties).asList()
-            .extracting("name")
-            .containsExactly("dentistry", "surgery");
-    }
-
-    @Test
     @Transactional
     void shouldAddNewVisitForPet() {
         Pet pet7 = service.petById(7);
@@ -215,7 +194,7 @@ class ClinicServiceTests {
      * @throws ObjectRetrievalFailureException if the entity was not found
      */
     private <T extends BaseEntity> T getById(Collection<T> entities, Class<T> entityClass, int entityId)
-        throws ObjectRetrievalFailureException {
+            throws ObjectRetrievalFailureException {
         for (T entity : entities) {
             if (entity.getId() == entityId && entityClass.isInstance(entity)) {
                 return entity;

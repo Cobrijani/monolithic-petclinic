@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.model;
+package org.springframework.samples.petclinic.vet.model;
+
+import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.samples.petclinic.vet.model.Vet;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
