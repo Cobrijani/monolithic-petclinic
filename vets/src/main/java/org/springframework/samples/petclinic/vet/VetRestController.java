@@ -16,14 +16,12 @@
 package org.springframework.samples.petclinic.vet;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.samples.petclinic.vet.VetService;
 import org.springframework.samples.petclinic.vet.dto.VetDto;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * @author Juergen Hoeller
@@ -32,17 +30,17 @@ import java.util.Map;
  * @author Arjen Poutsma
  */
 @RestController
-class VetController {
+@RequestMapping("/vets")
+class VetRestController {
 
     private final VetService vetService;
 
-    public VetController(VetService vetService) {
+    public VetRestController(VetService vetService) {
         this.vetService = vetService;
     }
 
-    @GetMapping("/vets")
+    @GetMapping
     public ResponseEntity<Collection<VetDto>> getAllVets() {
-
         return ResponseEntity.ok(vetService.allVets());
     }
 

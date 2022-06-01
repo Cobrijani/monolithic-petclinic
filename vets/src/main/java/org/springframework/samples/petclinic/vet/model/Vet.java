@@ -15,19 +15,13 @@
  */
 package org.springframework.samples.petclinic.vet.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.samples.petclinic.model.Person;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author Ken Krebs
